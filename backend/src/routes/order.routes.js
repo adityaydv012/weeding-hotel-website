@@ -1,0 +1,2 @@
+import { Router } from 'express'; import { requireAuth, allowRoles } from '../middleware/auth.js'; import { listOrders, updateOrderStatus } from '../controllers/order.controller.js';
+const router=Router(); router.use(requireAuth); router.get('/', allowRoles('SUPER_ADMIN','HOTEL_ADMIN','STAFF','KITCHEN'), listOrders); router.patch('/:id/status', allowRoles('SUPER_ADMIN','HOTEL_ADMIN','STAFF','KITCHEN'), updateOrderStatus); export default router;

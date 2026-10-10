@@ -1,0 +1,2 @@
+import { Router } from 'express'; import { requireAuth, allowRoles } from '../middleware/auth.js'; import { listFood, createFood, updateFood, deleteFood } from '../controllers/food.controller.js';
+const router=Router(); router.use(requireAuth); router.get('/', allowRoles('SUPER_ADMIN','HOTEL_ADMIN','STAFF'), listFood); router.post('/', allowRoles('SUPER_ADMIN','HOTEL_ADMIN'), createFood); router.patch('/:id', allowRoles('SUPER_ADMIN','HOTEL_ADMIN'), updateFood); router.delete('/:id', allowRoles('SUPER_ADMIN','HOTEL_ADMIN'), deleteFood); export default router;
