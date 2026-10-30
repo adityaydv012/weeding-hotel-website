@@ -1,9 +1,10 @@
-import { useEffect, useMemo, useState } from 'react';
 
+import { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { getRoomMenu } from '../api/client.js';
 import { useCart } from '../context/CartContext.jsx';
+import weddingVideo from '../assets/IMG_3443.MP4';
 
 function formatTime(dateString) {
   return new Intl.DateTimeFormat('en-IN', {
@@ -25,10 +26,7 @@ function GuestHomePage() {
   const { roomToken } = useParams();
   const navigate = useNavigate();
 
-  const {
-    cartCount,
-    subtotal,
-  } = useCart();
+  const { cartCount, subtotal } = useCart();
 
   const [context, setContext] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -43,8 +41,7 @@ function GuestHomePage() {
 
       if (!response.success) {
         throw new Error(
-          response.message ||
-            'Unable to load guest experience.'
+          response.message || 'Unable to load guest experience.'
         );
       }
 
@@ -77,32 +74,23 @@ function GuestHomePage() {
   const events = context?.events || [];
 
   const liveEvent = useMemo(
-    () =>
-      events.find(
-        (event) => event.status === 'LIVE'
-      ),
+    () => events.find((event) => event.status === 'LIVE'),
     [events]
   );
 
   const upcomingEvent = useMemo(
-    () =>
-      events.find(
-        (event) => event.status === 'UPCOMING'
-      ),
+    () => events.find((event) => event.status === 'UPCOMING'),
     [events]
   );
 
-  const featuredEvent =
-    liveEvent || upcomingEvent;
+  const featuredEvent = liveEvent || upcomingEvent;
 
   if (loading) {
     return (
       <main className="min-h-screen bg-[#f8f5f0] pb-24">
         <div className="mx-auto max-w-md px-5 py-8">
           <div className="h-5 w-28 animate-pulse rounded bg-stone-200" />
-
           <div className="mt-8 h-48 animate-pulse rounded-[32px] bg-stone-200" />
-
           <div className="mt-8 h-6 w-48 animate-pulse rounded bg-stone-200" />
 
           <div className="mt-4 grid grid-cols-2 gap-3">
@@ -149,22 +137,16 @@ function GuestHomePage() {
       {/* Decorative background */}
       <div className="pointer-events-none fixed inset-0 overflow-hidden">
         <div className="absolute -left-24 top-20 h-64 w-64 rounded-full bg-rose-200/30 blur-3xl" />
-
         <div className="absolute -right-24 top-72 h-72 w-72 rounded-full bg-amber-200/30 blur-3xl" />
-
         <div className="absolute bottom-0 left-1/2 h-80 w-80 -translate-x-1/2 rounded-full bg-orange-100/30 blur-3xl" />
       </div>
 
-      {/* Main desktop container */}
       <div className="relative mx-auto max-w-6xl px-5 sm:px-6 lg:px-8">
-
         {/* Top bar */}
         <header className="flex items-center justify-between pt-5">
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-sm ring-1 ring-stone-100">
-              <span className="font-serif text-lg text-stone-800">
-                R
-              </span>
+              <span className="font-serif text-lg text-stone-800">R</span>
             </div>
 
             <div>
@@ -183,32 +165,8 @@ function GuestHomePage() {
           </div>
         </header>
 
-        {/* ===================================================== */}
-        {/* ROSE & AMAN HERO BANNER                              */}
-        {/* ===================================================== */}
-
-        <section
-          className="
-            relative
-            mt-5
-            overflow-hidden
-            rounded-[36px]
-            bg-[#4b1725]
-            px-6
-            py-9
-            text-center
-            text-white
-            shadow-xl
-            sm:mt-6
-            sm:px-12
-            sm:py-12
-            lg:mt-8
-            lg:min-h-[390px]
-            lg:px-20
-            lg:py-16
-          "
-        >
-          {/* Decorative circles */}
+        {/* Rose & Aman hero banner */}
+        <section className="relative mt-5 overflow-hidden rounded-[36px] bg-[#4b1725] px-6 py-9 text-center text-white shadow-xl sm:mt-6 sm:px-12 sm:py-12 lg:mt-8 lg:min-h-[390px] lg:px-20 lg:py-16">
           <div className="absolute -left-12 -top-12 h-36 w-36 rounded-full border border-white/10 lg:-left-24 lg:-top-24 lg:h-64 lg:w-64" />
 
           <div className="absolute -bottom-16 -right-16 h-48 w-48 rounded-full border border-white/10 lg:-bottom-32 lg:-right-32 lg:h-80 lg:w-80" />
@@ -220,13 +178,6 @@ function GuestHomePage() {
           <div className="absolute bottom-7 right-7 text-amber-200/50 lg:bottom-10 lg:right-12 lg:text-xl">
             ✧
           </div>
-
-          {/* Additional desktop decorative details */}
-          <div className="absolute left-1/2 top-0 hidden h-full w-px bg-white/[0.025] lg:block" />
-
-          <div className="absolute left-12 top-1/2 hidden h-px w-20 bg-amber-200/10 lg:block" />
-
-          <div className="absolute right-12 top-1/2 hidden h-px w-20 bg-amber-200/10 lg:block" />
 
           <div className="relative mx-auto flex h-full max-w-4xl flex-col items-center justify-center">
             <p className="text-[10px] font-semibold uppercase tracking-[0.35em] text-amber-200/80 lg:text-[11px] lg:tracking-[0.45em]">
@@ -240,11 +191,9 @@ function GuestHomePage() {
 
               <div className="my-2 flex items-center justify-center gap-3 lg:my-3 lg:gap-5">
                 <span className="h-px w-10 bg-amber-200/50 lg:w-20" />
-
                 <span className="font-serif text-2xl italic text-amber-200 lg:text-3xl">
                   &
                 </span>
-
                 <span className="h-px w-10 bg-amber-200/50 lg:w-20" />
               </div>
 
@@ -264,13 +213,82 @@ function GuestHomePage() {
           </div>
         </section>
 
-        {/* ===================================================== */}
-        {/* NARROW CONTENT AREA                                 */}
-        {/* ===================================================== */}
+        {/* Wedding invitation */}
+        <section className="mx-auto mt-8 max-w-3xl overflow-hidden rounded-[32px] bg-white shadow-sm ring-1 ring-stone-100">
+          <div className="px-6 pb-5 pt-8 text-center sm:px-10 sm:pt-10">
+            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-rose-800">
+              A special invitation
+            </p>
 
+            <h2 className="mt-4 font-serif text-3xl leading-tight text-[#4b1725] sm:text-4xl">
+              Some stories are written in the stars,
+              <br className="hidden sm:block" />
+              some are destined by the heart.
+            </h2>
+
+            <p className="mt-3 text-2xl">❤️✨</p>
+
+            <p className="mt-3 font-serif text-xl italic text-stone-700">
+              And this is the beginning of ours.
+            </p>
+
+            <div className="mx-auto my-6 h-px w-16 bg-amber-300" />
+
+            <p className="font-serif text-2xl font-semibold tracking-wide text-[#4b1725] sm:text-3xl">
+              AMAN & ROSE JAISWAL
+            </p>
+
+            <p className="mt-3 text-sm font-medium leading-6 text-stone-600">
+              Two stories. One beautiful beginning. A lifetime of forever.
+            </p>
+
+            <p className="mx-auto mt-5 max-w-xl text-sm leading-7 text-stone-500">
+              With immense love and joy, we invite you to be a part of our
+              wedding celebrations and bless us as we begin this beautiful
+              new chapter together.
+            </p>
+          </div>
+
+          {/* Portrait wedding video */}
+          <div className="px-4 pb-5 sm:px-8 sm:pb-8">
+            <div className="mb-4 text-center">
+              <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-rose-800">
+                Our special moments
+              </p>
+
+              <h3 className="mt-2 font-serif text-2xl text-[#4b1725]">
+                Our wedding film awaits…
+              </h3>
+            </div>
+
+            {/* Portrait video container */}
+            <div className="mx-auto w-full max-w-[420px] overflow-hidden rounded-[24px] bg-black shadow-lg">
+              <video
+                src={weddingVideo}
+                className="mx-auto block h-auto max-h-[75vh] w-full object-cover"
+                autoPlay
+                muted
+                loop
+                playsInline
+                controls
+                preload="metadata"
+              >
+                Your browser does not support HTML video.
+              </video>
+            </div>
+
+            <p className="mt-5 text-center font-serif text-lg italic text-stone-600">
+              With love,
+            </p>
+
+            <p className="mt-1 text-center font-serif text-xl font-semibold text-[#4b1725]">
+              Aman & Rose ❤️
+            </p>
+          </div>
+        </section>
+
+        {/* Your stay */}
         <div className="mx-auto max-w-2xl">
-
-          {/* Welcome */}
           <section className="mt-8">
             <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-stone-400">
               Your stay
@@ -290,11 +308,7 @@ function GuestHomePage() {
             <section className="mt-6">
               <button
                 type="button"
-                onClick={() =>
-                  navigate(
-                    `/order/${roomToken}/events`
-                  )
-                }
+                onClick={() => navigate(`/order/${roomToken}/events`)}
                 className="group relative w-full overflow-hidden rounded-[28px] bg-white text-left shadow-sm ring-1 ring-stone-100 transition active:scale-[0.99]"
               >
                 {featuredEvent.coverImageUrl ? (
@@ -306,7 +320,6 @@ function GuestHomePage() {
                 ) : (
                   <div className="relative h-44 overflow-hidden bg-gradient-to-br from-rose-100 via-amber-50 to-orange-50">
                     <div className="absolute -left-10 -top-10 h-40 w-40 rounded-full bg-rose-300/30 blur-2xl" />
-
                     <div className="absolute -bottom-12 -right-10 h-48 w-48 rounded-full bg-amber-300/30 blur-2xl" />
 
                     <div className="relative flex h-full flex-col items-center justify-center">
@@ -347,26 +360,17 @@ function GuestHomePage() {
                     <span>
                       {featuredEvent.status === 'LIVE'
                         ? 'Happening now'
-                        : formatDate(
-                            featuredEvent.startAt
-                          )}
+                        : formatDate(featuredEvent.startAt)}
                     </span>
 
                     <span>•</span>
 
-                    <span>
-                      {formatTime(
-                        featuredEvent.startAt
-                      )}
-                    </span>
+                    <span>{formatTime(featuredEvent.startAt)}</span>
 
                     {featuredEvent.venue && (
                       <>
                         <span>•</span>
-
-                        <span>
-                          {featuredEvent.venue}
-                        </span>
+                        <span>{featuredEvent.venue}</span>
                       </>
                     )}
                   </div>
@@ -375,7 +379,7 @@ function GuestHomePage() {
             </section>
           )}
 
-          {/* Main actions */}
+          {/* Guest services */}
           <section className="mt-8">
             <div>
               <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-stone-400">
@@ -391,11 +395,7 @@ function GuestHomePage() {
               {/* Food */}
               <button
                 type="button"
-                onClick={() =>
-                  navigate(
-                    `/order/${roomToken}/menu`
-                  )
-                }
+                onClick={() => navigate(`/order/${roomToken}/menu`)}
                 className="group relative overflow-hidden rounded-[26px] bg-white p-5 text-left shadow-sm ring-1 ring-stone-100 transition active:scale-[0.98]"
               >
                 <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-orange-100" />
@@ -420,11 +420,7 @@ function GuestHomePage() {
               {/* Events */}
               <button
                 type="button"
-                onClick={() =>
-                  navigate(
-                    `/order/${roomToken}/events`
-                  )
-                }
+                onClick={() => navigate(`/order/${roomToken}/events`)}
                 className="group relative overflow-hidden rounded-[26px] bg-[#4b1725] p-5 text-left text-white shadow-sm transition active:scale-[0.98]"
               >
                 <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-amber-200/10" />
@@ -453,11 +449,7 @@ function GuestHomePage() {
             <section className="mt-4">
               <button
                 type="button"
-                onClick={() =>
-                  navigate(
-                    `/order/${roomToken}/cart`
-                  )
-                }
+                onClick={() => navigate(`/order/${roomToken}/cart`)}
                 className="flex w-full items-center justify-between rounded-[24px] bg-white p-4 text-left shadow-sm ring-1 ring-stone-100"
               >
                 <div className="flex items-center gap-3">
@@ -471,11 +463,8 @@ function GuestHomePage() {
                     </p>
 
                     <p className="mt-0.5 text-xs text-stone-500">
-                      {cartCount}{' '}
-                      {cartCount === 1
-                        ? 'item'
-                        : 'items'}{' '}
-                      · ₹{subtotal}
+                      {cartCount} {cartCount === 1 ? 'item' : 'items'} · ₹
+                      {subtotal}
                     </p>
                   </div>
                 </div>
@@ -505,7 +494,6 @@ function GuestHomePage() {
               </div>
             </div>
           </section>
-
         </div>
       </div>
     </main>
